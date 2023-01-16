@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lb-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: metallb-test
+  template:
+    metadata:
+      labels:
+        app: metallb-test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

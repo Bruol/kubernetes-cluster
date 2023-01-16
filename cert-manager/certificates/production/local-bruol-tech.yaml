@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-bruol-tech
+  namespace: default
+spec:
+  secretName: local-bruol-tech-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.local.bruol.tech"
+  dnsNames:
+  - "local.bruol.tech"
+  - "*.local.bruol.tech"

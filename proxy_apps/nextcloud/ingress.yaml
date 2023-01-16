@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nextcloud-ingress
+  namespace: default
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.nextcloud.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: nextcloud-service
+          port: 80
+    - match: Host(`nextcloud.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: nextcloud-service
+          port: 80
+          scheme: http
+  tls:
+    secretName: local-bruol-tech-tls

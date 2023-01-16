@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-local 
+  namespace: traefik
+spec:
+  ipWhiteList:
+    sourceRange:
+      - "192.168.0.0/16" # lan clients
+      - "192.168.0.194"
+    ipStrategy:
+      excludedIPs:
+        - "192.168.0.1"
+        - "10.0.0.0/8"

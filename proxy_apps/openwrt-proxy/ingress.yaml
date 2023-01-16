@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: openwrt-ingress
+  namespace: default
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.openwrt.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: openwrt-service
+          port: 80
+    - match: Host(`openwrt.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: openwrt-service
+          port: 80
+  tls:
+    secretName: local-bruol-tech-tls

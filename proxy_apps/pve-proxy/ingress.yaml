@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pve-ingress
+  namespace: default
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.pve.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: pve-service
+          port: 8006
+    - match: Host(`pve.local.bruol.tech`)
+      kind: Rule
+      services:
+        - name: pve-service
+          port: 8006
+          scheme: https
+  tls:
+    secretName: local-bruol-tech-tls
