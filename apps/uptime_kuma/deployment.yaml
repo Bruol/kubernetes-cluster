@@ -20,5 +20,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3001
-
-
+        volumeMounts:
+          - mountPath: /app/data
+            name: uptime-kuma-data
+  
