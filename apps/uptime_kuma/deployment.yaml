@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: uptime-kuma
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: uptime-kuma
@@ -11,6 +12,10 @@ spec:
       labels:
         app: uptime-kuma
     spec:
+      securityContext:
+        runAsUser: 1003
+        runAsGroup: 1003
+        fsGroup: 1003
       containers:
       - name: uptime-kuma
         image: louislam/uptime-kuma
@@ -23,4 +28,7 @@ spec:
         volumeMounts:
           - mountPath: /app/data
             name: uptime-kuma-data
-  
+      volumes:
+        - name: uptime-kuma-data
+          persistentVolumeClaim:
+            claimName: uptime-kuma-pvc
