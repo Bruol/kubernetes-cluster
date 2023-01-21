@@ -1,16 +1,13 @@
-apiVersion: v1
-kind: PersistentVolume
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
 metadata:
-  name: nfs-pv
-  namespace: kuma
-  labels:
-    name: nfs # name can be anything
+  name: nfs
+  namespace: default
 spec:
-  storageClassName: nfs-client # same storage class as pvc
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 192.168.0.60
-    path: "/mnt/Seagate_Mirror/k3s_nfs" # path to directory
+  chart: nfs-subdir-external-provisioner
+  repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+  targetNamespace: default
+  set:
+    nfs.server: 192.168.0.60
+    nfs.path: /mnt/Seagate_Mirror/k3s_nfs
+    storageClass.name: nfs
