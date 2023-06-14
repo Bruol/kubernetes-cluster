@@ -1,2 +1,2 @@
 # Longhorn
-kubectl create -f https://raw.githubusercontent.com/longhorn/longhorn/varchives/deploy/longhorn.yaml
+kubectl create -f kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.4.0/deploy/longhorn.yaml

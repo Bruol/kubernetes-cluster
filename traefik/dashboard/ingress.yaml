@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.local.bruol.tech`)
+    - match: Host(`traefik.local.bruol.me`)
       kind: Rule
       middlewares:
         - name: traefik-dashboard-basicauth
@@ -18,4 +18,4 @@ spec:
         - name: api@internal
           kind: TraefikService
   tls:
-    secretName: local-bruol-tech-tls
+    secretName: local-bruol-me-tls

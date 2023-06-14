@@ -1,0 +1,28 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pihole-ingress-me
+  namespace: default
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.pihole.local.bruol.me`)
+      kind: Rule
+      services:
+        - name: pihole-service
+          port: 80
+      middlewares:
+        - name: pihole-middleware
+    - match: Host(`pihole.local.bruol.me`)
+      kind: Rule
+      services:
+        - name: pihole-service
+          port: 80
+      middlewares:
+        - name: pihole-middleware
+  tls:
+    secretName: local-bruol-me-tls

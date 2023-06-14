@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ha-ingress-me
+  namespace: default
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.ha.local.bruol.me`)
+      kind: Rule
+      services:
+        - name: ha-service
+          port: 8123
+    - match: Host(`ha.local.bruol.me`)
+      kind: Rule
+      services:
+        - name: ha-service
+          port: 8123
+          scheme: http
+  tls:
+    secretName: local-bruol-me-tls

@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-bruol-me-staging
+  namespace: default
+spec:
+  secretName: local-bruol-me-staging1-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: "*.local.bruol.me"
+  dnsNames:
+  - "local.bruol.me"
+  - "*.local.bruol.me"
+
